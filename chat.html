@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Stylish CSS3 Form Effects - Hongkiat Demo</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://static02.hongkiat.com/logo/hkdc/favicon.ico">
+  <link rel="icon" href="http://static02.hongkiat.com/logo/hkdc/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="style.css">
+  <link rel="stylesheet" type="text/css" media="all" href="responsive.css">
+</head>
+
+<body>
+
+	<section id="container">
+		<span class="chyron"><em><a href="http://www.hongkiat.com/blog/">&laquo; back to the site</a></em></span>
+		<h2>Hongkiat Stylish Form Elements</h2>
+	
+		<div id="wrapping" class="clearfix">
+			<section id="aligned">
+			
+				<div class="chat">
+					<div class="messages">сообщение пользователей</div>
+										<div class = "myMsg">
+											мое сооб
+										</div>
+								
+										<div class = "manMsg">
+											dfsfsd
+										</div>
+										<div class="msg_insert">
+										
+										</div>					
+							
+				</div>
+			
+				
+				<textarea name="message" id="message" placeholder="Введите сообщение..."  class="txtblock"></textarea>
+			
+			</section>
+			
+			<section id="aside" class="clearfix">
+				<div class="usersOnline">
+					Users Online
+				</div>
+			</section>
+		</div>	
+		
+	</section>
+
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		
+
+	<script>
+		function insertMsg(){
+			//insert msg into DB
+														
+				url = 'insert.php';
+				type = 'POST';
+			
+		//		var	name = $('#user').val(),
+				var name = "Sergey",
+				message = $('#ta').val();
+				var string = 'name='+name+'&message='+message;
+	//		console.log(name);			
+			
+			$.ajax({
+				url: url,
+				type : type,
+				data : string,
+				success: function(msg){
+					console.log(msg);
+					$('<div class="myMsg">'+msg+'</div>').appendTo('.msg_insert'); // insert msg into site
+					$('#chat').scrollTop($('#chat')[0].scrollHeight);	// просмотр чата в конец				
+				}
+										
+			});							
+	}
+	</script>
+	<script>		
+			function usersOnline(){
+			console.log("usersOnline working");
+				$.ajax({
+				cache : true,	
+				url : "usersOnline.php",
+				type : "POST",
+				success : function(msg){
+				//	$('<div class="manMsg">'+msg+'</div>').appendTo('.msg_insert');	
+					$('.usersOnline').html(msg);			
+					}					
+				})
+				
+			}
+		
+	</script>
+	<script src="chatBox.js"></script>
+</body>
+</html>
